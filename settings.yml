@@ -1,7 +1,7 @@
 use_default_settings: true
 
 server:
-  secret_key: "changeme_ultrasecretkey_for_production"
+  secret_key: "ultrasecretkey" # Is overwritten by ${SEARXNG_SECRET}
   image_proxy: true
 
 search:
