@@ -12,7 +12,7 @@ RUN wget -q -O /tmp/node.tar.xz https://nodejs.org/dist/v24.18.0/node-v24.18.0-l
 RUN npm install -g mcp-searxng
 
 # Copy customized template (entrypoint creates settings.yml from it)
-COPY settings.template.yml /etc/searxng/settings.template.yml
+COPY settings.template.yml /usr/local/searxng/settings.template.yml
 
 # Copy the entrypoint script that launches both searxng and mcp server on stdio
 COPY --chmod=0755 entrypoint.sh /usr/local/bin/entrypoint.sh
