@@ -11,12 +11,14 @@ RUN wget -q -O /tmp/node.tar.xz https://nodejs.org/dist/v24.18.0/node-v24.18.0-l
 # Install MCP server
 RUN npm install -g mcp-searxng
 
-# Copy custom settings and startup script
-COPY settings.yml /etc/searxng/settings.yml
+# Copy customized template (entrypoint creates settings.yml from it)
+COPY settings.template.yml /etc/searxng/settings.template.yml
+
+# Copy the entrypoint script that launches both searxng and mcp server on stdio
 COPY --chmod=0755 entrypoint.sh /usr/local/bin/entrypoint.sh
 
 # Port 8080 is used by searxng (internal container communication)
 ENV SEARXNG_URL=http://localhost:8080
 
 # Override entrypoint to run both searxng and MCP server
-ENTRYPOINT ["sh", "/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
